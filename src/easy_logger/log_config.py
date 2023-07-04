@@ -8,7 +8,6 @@ from pathlib import Path
 from dataclasses import dataclass, field
 from enum import Enum
 
-from colorama import Fore, Style
 import colorlog
 
 from easy_logger.statics import STREAM_COLORS
@@ -64,32 +63,6 @@ def with_suffix(logName) -> str:
     """Add suffix to logname."""
 
     return str(Path(logName).with_suffix('.log'))
-
-
-class StreamColorFormatter(logging.Formatter):
-    """Creates a color formatted stream log.
-
-    :param logging: _description_
-    :type logging: _type_
-    :return: _description_
-    :rtype: _type_
-    """
-
-    format: str = LOG_STREAM_FORMAT
-
-    FORMATS: dict[int, Any] = {
-        logging.DEBUG: Fore.LIGHTCYAN_EX + format + Style.RESET_ALL,
-        logging.INFO: Fore.BLACK + format + Style.RESET_ALL,
-        logging.WARNING: Fore.YELLOW + format + Style.RESET_ALL,
-        logging.ERROR: Fore.RED + format + Style.RESET_ALL,
-        logging.CRITICAL: Fore.MAGENTA + format + Style.RESET_ALL
-    }
-
-    def format(self, record) -> str:
-        log_fmt = self.FORMATS.get(record.levelno)
-        formatter = logging.Formatter(log_fmt)
-        return formatter.format(record)
-
 
 class RotatingLog:
     """Customized RotatigLogger.
