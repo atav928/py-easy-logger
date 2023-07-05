@@ -64,6 +64,7 @@ def with_suffix(logName) -> str:
 
     return str(Path(logName).with_suffix('.log'))
 
+
 class RotatingLog:
     """Customized RotatigLogger.
 
