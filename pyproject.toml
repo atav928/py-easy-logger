@@ -9,7 +9,7 @@ requires = [
 ]
 
 [project]
-name = "easy-logger"
+name = "py-easy-logger"
 authors = [
     {name = "atav928", email = "dev@tavnets.com"}
 ]
