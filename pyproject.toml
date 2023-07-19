@@ -35,7 +35,7 @@ version = {attr = "easy_logger.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src", "tests"]
-include = ["*.jpg"]
+include = ["*.jpg", "easy_logger*"]
 #namespaces = true
 
 [tool.coverage.run]
