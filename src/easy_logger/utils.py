@@ -1,8 +1,11 @@
 """Utilities"""
 
 from pathlib import Path
+import platform
+import tempfile
 
-def set_bool(value: str, default=False):
+
+def set_bool(value: str, default: bool = False):
     """sets bool value when pulling string from os env
 
     Args:
@@ -19,7 +22,23 @@ def set_bool(value: str, default=False):
         value_bool = True
     elif str(value).lower() == 'false':
         value_bool = False
-    elif isinstance(value, str):
-        if Path.exists(Path(value)):
-            value_bool = value
+    elif Path.exists(Path(value)):
+        value_bool = value
     return value_bool
+
+
+def get_log_dir() -> str:
+    """Get default log directory depending on OS.
+
+    :return: Log Directory for System.
+    :rtype: str
+    """
+    directory: dict[str, Path] = {
+        "darwin": Path.joinpath(Path.home() / "Library/Logs"),
+        "linux": Path("/var/log")
+    }
+    plat: str = platform.system()
+    try:
+        return str(directory[plat.lower()])
+    except KeyError:
+        return tempfile.gettempdir()
