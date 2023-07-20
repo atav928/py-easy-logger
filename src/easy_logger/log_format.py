@@ -6,7 +6,8 @@ from collections import OrderedDict
 
 
 def splunk_format(**kwargs: Any) -> str:
-    """Reformat a list of key:value pairs into a simple logging message for Splunk.
+    """
+    Reformat a list of key:value pairs into a simple logging message for Splunk.
 
     :return: _description_
     :rtype: str
@@ -20,7 +21,8 @@ def splunk_hec_format(host: str, source: str,
                       sourcetype: str,
                       metrics_list: list[str] = None,
                       **kwargs: Any) -> dict[str, Any]:
-    """Create a JSON style hec format.
+    """
+    Create a JSON style hec format.
 
     :param host: hostname
     :type host: str
@@ -53,3 +55,15 @@ def splunk_hec_format(host: str, source: str,
     hec_json["events"] = {**hec_json["events"], **kwargs}
     hec_json["events"] = dict(sorted(hec_json["events"].items()))
     return hec_json
+
+
+def reformat_exception(error: Exception) -> str:
+    """
+    Reformates Exception to print out as a string pass for logging
+
+    :param error: caught excpetion
+    :type error: Exception
+    :return: error as string
+    :rtype: str
+    """
+    return f"{type(error).__name__}: {str(error)}" if error else ""

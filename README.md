@@ -80,6 +80,10 @@ __NOTE:__ It is usually best practice when passing a logger around a large proje
 
 ## Versions
 
+### v0.0.5
+
+* Added a retry decorator.
+
 ### v0.0.4
 
 * Added utility to find OS Log directory.
