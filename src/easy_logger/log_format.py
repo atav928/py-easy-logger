@@ -4,6 +4,28 @@ import datetime
 from typing import Any
 from collections import OrderedDict
 
+def json_extract(obj, key):
+    """Recursively fetch values from a nested JSON.
+
+    :param obj: _description_
+    :type obj: _type_
+    :param key: _description_
+    :type key: _type_
+    """
+    arr = []
+    def extract(obj, arr, key):
+        if isinstance(obj, dict):
+            for k,v in obj.items():
+                if isinstance(v, (dict, list)):
+                    extract(v, arr, key)
+                elif k==key:
+                    arr.append(v)
+        elif isinstance(obj, list):
+            for item in obj:
+                extract(item, arr, key)
+        return arr
+    values = extract(obj, arr, key)
+    return values
 
 def splunk_format(**kwargs: Any) -> str:
     """Reformat a list of key:value pairs into a simple logging message for Splunk.
