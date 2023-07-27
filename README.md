@@ -83,6 +83,7 @@ __NOTE:__ It is usually best practice when passing a logger around a large proje
 ### v0.0.5
 
 * Added a retry decorator.
+* Added Error handler with ability to customize the error return value or ability to log out the error.
 
 ### v0.0.4
 
