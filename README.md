@@ -84,6 +84,7 @@ __NOTE:__ It is usually best practice when passing a logger around a large proje
 
 * Added a retry decorator.
 * Added Error handler with ability to customize the error return value or ability to log out the error.
+* __BUGFIX__ issue with reformat Exception when added to a JSON object can become problematic so filtering out ugly formating from raised Exception.
 
 ### v0.0.4
 

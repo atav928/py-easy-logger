@@ -3,7 +3,7 @@
 import datetime
 from typing import Any
 from collections import OrderedDict
-
+import re
 
 def splunk_format(**kwargs: Any) -> str:
     """
@@ -66,4 +66,6 @@ def reformat_exception(error: Exception) -> str:
     :return: error as string
     :rtype: str
     """
-    return f"{type(error).__name__}: {str(error)}" if error else ""
+    resp: str = f"{type(error).__name__}: {str(error)}" if error else ""
+    resp = re.sub(r"(\]|\[|\')", "", resp)
+    return resp
