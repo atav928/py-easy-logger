@@ -49,7 +49,8 @@ log.critical("This is a critical log message.")
 
 What this will look like in the console:
 
-![console output](https://raw.githubusercontent.com/atav928/py-easy-logger/main/sample_output.jpg?token=GHSAT0AAAAAACB6S7Y5URXU3QVZKJXEG3LAZGD63UA)
+![console output](https://raw.githubusercontent.com/atav928/py-easy-logger/main/images/sample_output.jpg?token=GHSAT0AAAAAACB6S7Y5A4D4GS7OQRKEILDCZGEADKA)
+
 
 If written to file:
 
