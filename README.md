@@ -27,11 +27,11 @@ __Configuration Values:__
 
 ```python
 import easy_logger
-from easy_logger.utils import get_log_dir
+from easy_logger.utils import set_logdir
 
 logger = easy_logger.RotatingLog(__name__,
                                  logName="sample.log",
-                                 logDir=get_log_dir(),
+                                 logDir=set_logdir("default"),
                                  level="DEBUG",
                                  stream=True,
                                  setLog=True,
@@ -39,7 +39,7 @@ logger = easy_logger.RotatingLog(__name__,
                                  maxBytes=10000,
                                  backupCount=10)
 log = logger.getLogger(__name__)
-log.info(f"Writting out file to: {get_log_dir()}")
+log.info(f"Writting out file to: {set_logdir('default')}")
 log.info("This is an informational log message.")
 log.debug("This is a debug log message.")
 log.warning("This is a warning log message.")
@@ -49,13 +49,13 @@ log.critical("This is a critical log message.")
 
 What this will look like in the console:
 
-![console output](sample_output.jpg)
+![console output](https://raw.githubusercontent.com/atav928/py-easy-logger/main/sample_output.jpg?token=GHSAT0AAAAAACB6S7Y5URXU3QVZKJXEG3LAZGD63UA)
 
 If written to file:
 
 ```bash
 >>> cat ~/Library/Logs/sample.log 
-[2023-07-19 12:25:01,648] level=INFO     name=__main__     fn=<ipython-input-1-e1c5bba1549c> ln=14 func=<module>: Writting out file to: /Users/*****/Library/Logs
+[2023-07-19 12:25:01,648] level=INFO     name=__main__     fn=<ipython-input-1-e1c5bba1549c> ln=14 func=<module>: Writting out file to: ~/Library/Logs
 [2023-07-19 12:25:01,650] level=INFO     name=__main__     fn=<ipython-input-1-e1c5bba1549c> ln=15 func=<module>: This is an informational log message.
 [2023-07-19 12:25:01,652] level=DEBUG    name=__main__     fn=<ipython-input-1-e1c5bba1549c> ln=16 func=<module>: This is a debug log message.
 [2023-07-19 12:25:01,658] level=WARNING  name=__main__     fn=<ipython-input-1-e1c5bba1549c> ln=17 func=<module>: This is a warning log message.
@@ -68,15 +68,60 @@ If the __name__ value is passed as a string instead of using the python file nam
 log = logger.getLogger("easy_logger")
 ```
 
+<details><summary> Sample Log File Output Format</summary><p>
+
 ```bash
-[2023-07-19 12:34:53,266] level=INFO     name=easy_logger  fn=<ipython-input-2-297430e75a74> ln=14 func=<module>: Writting out file to: /Users/*******/Library/Logs
+[2023-07-19 12:34:53,266] level=INFO     name=easy_logger  fn=<ipython-input-2-297430e75a74> ln=14 func=<module>: Writting out file to: ~/Library/Logs
 [2023-07-19 12:34:53,268] level=INFO     name=easy_logger  fn=<ipython-input-2-297430e75a74> ln=15 func=<module>: This is an informational log message.
 [2023-07-19 12:34:53,268] level=DEBUG    name=easy_logger  fn=<ipython-input-2-297430e75a74> ln=16 func=<module>: This is a debug log message.
 [2023-07-19 12:34:53,269] level=WARNING  name=easy_logger  fn=<ipython-input-2-297430e75a74> ln=17 func=<module>: This is a warning log message.
 [2023-07-19 12:34:53,269] level=CRITICAL name=easy_logger  fn=<ipython-input-2-297430e75a74> ln=18 func=<module>: This is a critical log message.
 ```
 
+</p></details>
+
 __NOTE:__ It is usually best practice when passing a logger around a large project to pick up the name of the file and the function for easier troubleshooting depending on what method you use.
+
+### Extended Functions
+
+__Application Log Directory:__
+
+You can set up a subdirectory for your application on a system using the system's default location by leveraging and extension function in the logDir value.
+
+```python
+import easy_logger
+from easy_logger.utils import set_logdir
+
+logger = easy_logger.RotatingLog(__name__,
+                                 logName="sample.log",
+                                 logDir=set_logdir("extend", extend="ApplicationName"),
+                                 level="DEBUG",
+                                 stream=True,
+                                 setLog=True,
+                                 setFile=True,
+                                 maxBytes=10000,
+                                 backupCount=10)
+log = logger.getLogger(__name__)
+log.info(f"log directory set to {logger.settings.logDir}")
+log.info("This is an informational log message.")
+log.debug("This is a debug log message.")
+log.warning("This is a warning log message.")
+log.critical("This is a critical log message.")
+```
+
+<details><summary>Sample Application Log Directory Output</summary><p>
+
+```bash
+>>> cat ~/Library/Logs/ApplicationName/sample.log
+
+[2023-07-28 13:03:48,438] level=INFO     name=__main__     fn=<ipython-input-3-edd6755574f8> ln=1 func=<module>: log directory set to ~/Library/Logs/ApplicationName
+[2023-07-28 13:03:48,443] level=INFO     name=__main__     fn=<ipython-input-3-edd6755574f8> ln=2 func=<module>: This is an informational log message.
+[2023-07-28 13:03:48,446] level=DEBUG    name=__main__     fn=<ipython-input-3-edd6755574f8> ln=3 func=<module>: This is a debug log message.
+[2023-07-28 13:03:48,450] level=WARNING  name=__main__     fn=<ipython-input-3-edd6755574f8> ln=4 func=<module>: This is a warning log message.
+[2023-07-28 13:03:48,452] level=CRITICAL name=__main__     fn=<ipython-input-3-edd6755574f8> ln=5 func=<module>: This is a critical log message.
+```
+
+</p></details>
 
 ## Versions
 
