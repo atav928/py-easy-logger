@@ -126,6 +126,11 @@ log.critical("This is a critical log message.")
 
 ## Versions
 
+### v0.0.6
+
+* Added color samples as defaults.
+* Created a Color Console only.
+
 ### v0.0.5
 
 * Added a retry decorator.
