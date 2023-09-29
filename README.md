@@ -130,6 +130,7 @@ log.critical("This is a critical log message.")
 
 * Added color samples as defaults.
 * Created a Color Console only.
+* Updated reformat error to remove `[`,`]` characters as it causes issues reading on some systems; replaced with `list()`.
 
 ### v0.0.5
 

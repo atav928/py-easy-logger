@@ -145,7 +145,7 @@ class ConsoleStreamer(BaseLog):
 
     def getLogger(self, name: str):
         """
-        Gets a Logger Console Instance.
+        Get a Logger Console Instance.
 
         :param name: _description_
         :type name: str
@@ -175,7 +175,7 @@ class RotatingLog:
     _setLog: bool = True
     _setFile: bool = True
 
-    def __init__(self, name: str, logName: str = 'sample.log', logDir=None,
+    def __init__(self, name: str, logName: str = 'sample.log', logDir: str=None,
                  maxBytes: int = 5242990, backupCount: int = 5, mode: str = 'a', level: str = 'INFO',
                  stream: bool = True, setLog: bool = True, setFile: bool = True) -> None:
         """Create an instance for each new Rotating Logger."""
@@ -216,7 +216,7 @@ class RotatingLog:
         return self._name
 
     @name.setter
-    def name(self, value) -> None:
+    def name(self, value: str) -> None:
         self._name = value
 
     @property
