@@ -126,6 +126,13 @@ log.critical("This is a critical log message.")
 
 ## Versions
 
+### v0.0.6
+
+* Added color samples as defaults.
+* Created a Color Console only.
+* Updated reformat error to remove `[`,`]` characters as it causes issues reading on some systems; replaced with `list()`.
+* Added ability to change Log Format for streaming.
+
 ### v0.0.5
 
 * Added a retry decorator.

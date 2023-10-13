@@ -59,7 +59,7 @@ def splunk_hec_format(host: str, source: str,
 
 def reformat_exception(error: Exception) -> str:
     """
-    Reformates Exception to print out as a string pass for logging
+    Reformates Exception to print out as a string pass for logging.
 
     :param error: caught excpetion
     :type error: Exception
@@ -67,5 +67,9 @@ def reformat_exception(error: Exception) -> str:
     :rtype: str
     """
     resp: str = f"{type(error).__name__}: {str(error)}" if error else ""
-    resp = re.sub(r"(\]|\[|\')", "", resp)
+    # resp = re.sub(r"(\]|\[|\')", "", resp)
+    # Replacing [ ] with list() due to issues with reading that format with some systems.
+    resp = re.sub(r"\'", "", resp)
+    resp = re.sub(r'\[', 'list(', resp)
+    resp = re.sub(r"\]", ')', resp)
     return resp
